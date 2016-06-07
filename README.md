@@ -13,7 +13,7 @@ Import template.html into your main html document
 ```
 
 ###Preview
-![alt text](https://www.dropbox.com/s/68lpomp244vgvn0/Screenshot%202016-06-07%2021.23.50.png?dl=0 "Preview")
+![alt text](https://i.imgur.com/u86ho5t.png?1 "Preview")
 
 ###Attributes overview
 

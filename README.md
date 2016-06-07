@@ -20,5 +20,5 @@ Paste this snippet where you want to show compass
 
 | Attribute     | Description   |
 | ------------- |:-------------:|
-| Azimut        | Azumuth in decimal degrees (this attribute is observed, widget will be updated when this attribute is changed) |
+| Azimuth       | Azumuth in decimal degrees (this attribute is observed, widget will be updated when this attribute is changed) |
 | Radius        | Raduis of widget in pixels      |

@@ -1,0 +1,95 @@
+((window, document) => {
+
+    var owner = document.currentScript.ownerDocument;
+
+    class CompassView extends HTMLElement {
+
+        constructor() {
+            this.createdCallback();
+        }
+
+        createdCallback() {
+            this.azimuth = this.validateAzimuth(this.getAttribute("azimuth"));
+            this.radius = parseInt(this.getAttribute("radius"));
+            this.root = this.createShadowRoot();
+            this.innerScale = 0.8;
+            this.template = owner.querySelector("template");
+            this.clone = this.template.content.cloneNode(this.template);
+            this.arrow = $(this.clone).find(".arrow");
+            this.label = $(this.clone).find('.main-label');
+            var discOuter = $(this.clone).find(".disc-outer"),
+                discInner = $(this.clone).find(".disc-inner"),
+                labelN = $(this.clone).find(".label-n"),
+                labelS = $(this.clone).find(".label-s"),
+                labelE = $(this.clone).find(".label-e"),
+                labelW = $(this.clone).find(".label-w"),
+                arrowHeight = this.radius * 0.1,
+                arrowWidth = arrowHeight + 5;
+
+            this.root.appendChild(this.clone);
+
+            var labelWidth = labelN.width(),
+                labelHeight = labelN.height();
+
+            labelN
+                .css("top", 0)
+                .css("left", Math.floor(this.radius - (labelWidth / 2)) + "px");
+            labelS
+                .css("bottom", -4)
+                .css("left", Math.floor(this.radius - (labelWidth / 2) + 2) + "px");
+            labelE
+                .css("top", Math.floor(this.radius - (labelHeight / 2)) + "px")
+                .css("right", 4);
+            labelW
+                .css("top", Math.floor(this.radius - (labelHeight / 2)) + "px")
+                .css("left", 2 + 1);
+
+            discOuter
+                .width(this.radius * 2)
+                .height(this.radius * 2)
+                .css("background-color", "#263174");
+
+            var diff = (this.radius) - (this.radius * this.innerScale);
+            discInner
+                .width(this.radius * 2 * this.innerScale)
+                .height(this.radius * 2 * this.innerScale)
+                .css("top", diff + "px")
+                .css("left", diff + "px")
+                .css("background-color", "#3646a7");
+
+            this.arrow
+                .css("border-width", "0px " + (arrowWidth / 2) + "px " + arrowHeight + "px " + (arrowWidth / 2) + "px")
+                .css("border-color", "transparent transparent #fff transparent")
+                .css("left", this.radius - (arrowWidth / 2))
+                .css("top", arrowHeight * 2 + 2)
+                .css("transform-origin", ((arrowWidth / 2)) + "px " + (this.radius - diff - 2) + "px")
+                .css("transform", "rotate(" + this.azimuth + "deg)")
+
+            this.label
+                .css('top', this.radius - (this.label.height() / 2))
+                .css('left', 5)
+                .html(this.azimuth + '°');
+        }
+
+        attributeChangedCallback(attrName, oldVal, newVal) {
+            if (attrName == "azimuth") {
+                this.azimuth = this.validateAzimuth(this.getAttribute("azimuth"));
+                this.arrow.css("transform", "rotate(" + this.azimuth + "deg)");
+                this.label.html(this.azimuth + '°');
+            }
+        }
+
+        validateAzimuth(azimuth) {
+            if (0 < azimuth && azimuth < 360) {
+                return parseInt(azimuth);
+            }
+
+            azimuth = azimuth % 360;
+            this.setAttribute("azimuth", azimuth);
+            return parseInt(azimuth);
+        }
+
+    }
+
+    document.registerElement("compass-view", CompassView);
+})(window, document);

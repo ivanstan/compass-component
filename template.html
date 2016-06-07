@@ -1,0 +1,55 @@
+<script src="controller.js"></script>
+
+<template>
+    <style>
+        .disc-outer {
+            position: relative;
+            border-radius: 50%;
+
+            -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.35);
+            -moz-box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.35);
+            box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.35);
+        }
+
+        .disc-inner {
+            position: absolute;
+            border-radius: 50%;
+
+            -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+            -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+        }
+
+        .arrow {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            position: relative;
+        }
+
+        .label {
+            display: inline-block;
+            position: absolute;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .main-label {
+            text-align: center;
+            width: 100%;
+            font-size: 25px;
+        }
+
+    </style>
+
+    <div class="disc-outer">
+        <div class="disc-inner"></div>
+        <div class="arrow"></div>
+        <span class="label main-label">0°</span>
+        <span class="label label-n">N</span>
+        <span class="label label-e">E</span>
+        <span class="label label-s">S</span>
+        <span class="label label-w">W</span>
+    </div>
+
+</template>

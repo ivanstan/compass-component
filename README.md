@@ -12,6 +12,9 @@ Import template.html into your main html document
 <compass-view azimuth="352" radius="100"></compass-view>
 ```
 
+###Preview
+![alt text](https://www.dropbox.com/s/68lpomp244vgvn0/Screenshot%202016-06-07%2021.23.50.png?dl=0 "Preview")
+
 ###Attributes overview
 
 | Attribute     | Description   |

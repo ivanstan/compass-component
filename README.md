@@ -7,7 +7,8 @@ Import template.html into your main html document
 <link rel="import" href="component/compass/template.html">
 ```
 
-###Usage paste this snippet where you want to show compass
+###Usage 
+Paste this snippet where you want to show compass
 ```html
 <compass-view azimuth="352" radius="100"></compass-view>
 ```

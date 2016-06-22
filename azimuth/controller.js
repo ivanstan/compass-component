@@ -2,21 +2,25 @@
 
     var owner = document.currentScript.ownerDocument;
 
-    class CompassView extends HTMLElement {
+    class AzimuthView extends BaseView {
 
         constructor() {
             this.createdCallback();
         }
 
         createdCallback() {
-            this.azimuth = this.validateAzimuth(this.getAttribute("azimuth"));
-            this.radius = parseInt(this.getAttribute("radius"));
+            super.createdCallback();
+            this.azimuth = this.validateAngle(this.getAttribute("azimuth"));
+            this.radius = this.getAttribute("radius") ? parseInt(this.getAttribute("radius")) : 100;
+            this.title = this.getAttribute("title") ? parseInt(this.getAttribute("title")) : 'Azimuth';
             this.root = this.createShadowRoot();
             this.innerScale = 0.8;
             this.template = owner.querySelector("template");
             this.clone = this.template.content.cloneNode(this.template);
             this.arrow = $(this.clone).find(".arrow");
             this.label = $(this.clone).find('.main-label');
+            this.titleLabel = $(this.clone).find('.title-label');
+            this.unitLabel = $(this.clone).find('.unit-label');
             var discOuter = $(this.clone).find(".disc-outer"),
                 discInner = $(this.clone).find(".disc-inner"),
                 labelN = $(this.clone).find(".label-n"),
@@ -47,7 +51,7 @@
             discOuter
                 .width(this.radius * 2)
                 .height(this.radius * 2)
-                .css("background-color", "#263174");
+                .css("background-color", this.colorPrimary);
 
             var diff = (this.radius) - (this.radius * this.innerScale);
             discInner
@@ -55,7 +59,7 @@
                 .height(this.radius * 2 * this.innerScale)
                 .css("top", diff + "px")
                 .css("left", diff + "px")
-                .css("background-color", "#3646a7");
+                .css("background-color", this.colorSecondary);
 
             this.arrow
                 .css("border-width", "0px " + (arrowWidth / 2) + "px " + arrowHeight + "px " + (arrowWidth / 2) + "px")
@@ -69,27 +73,24 @@
                 .css('top', this.radius - (this.label.height() / 2))
                 .css('left', 5)
                 .html(this.azimuth + '°');
+
+            this.titleLabel
+                .css('bottom', this.radius + (this.label.height() / 2) * 1.5)
+                .html(this.title);
+
+            this.unitLabel
+                .css('top', this.radius + (this.label.height() / 2) * 1.5)
         }
 
         attributeChangedCallback(attrName, oldVal, newVal) {
             if (attrName == "azimuth") {
-                this.azimuth = this.validateAzimuth(this.getAttribute("azimuth"));
+                this.azimuth = this.validateAngle(this.getAttribute("azimuth"));
                 this.arrow.css("transform", "rotate(" + this.azimuth + "deg)");
                 this.label.html(this.azimuth + '°');
             }
         }
 
-        validateAzimuth(azimuth) {
-            if (0 < azimuth && azimuth < 360) {
-                return parseInt(azimuth);
-            }
-
-            azimuth = azimuth % 360;
-            this.setAttribute("azimuth", azimuth);
-            return parseInt(azimuth);
-        }
-
     }
 
-    document.registerElement("compass-view", CompassView);
+    document.registerElement("azimuth-view", AzimuthView);
 })(window, document);

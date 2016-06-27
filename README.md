@@ -1,10 +1,3 @@
-<style>
-table {
-    display:table;
-    width:100%;
-}
-</style>
-
 # compass-component
 Webcomponents capable of displaying azimuth and elevation in decimal degrees
 

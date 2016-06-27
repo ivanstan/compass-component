@@ -1,29 +1,47 @@
 # compass-component
-Webcomponent capable of displaying azimuth in decimal degrees
+Webcomponents capable of displaying azimuth and elevation in decimal degrees
 
 ##Installation
-Import template.html into your main html document
+Import following into your main html document to enable usage of components
 ```html
-<link rel="import" href="component/compass/template.html">
+<script src="vendor/compass-component/javascript/BaseView.js"></script>
+<link rel="import" href="vendor/compass-component/azimuth-view.html">
+<link rel="import" href="vendor/compass-component/elevation-view.html">
 ```
 
 ###Usage 
 Paste this snippet where you want to show compass
 ```html
-<compass-view azimuth="352" radius="100"></compass-view>
+<azimuth-view azimuth="352" radius="100"></compass-azimuth>
+<elevation-view elevation="36" radius="100"></compass-elevation>
 ```
 
 ###Preview
-![alt text](https://i.imgur.com/u86ho5t.png?1 "Preview")
+Privious code will output following
+<p align="center">
+<img alt="Component preview" src="https://i.imgur.com/u86ho5t.png?1">
+</p>
 
 
 ###Attributes overview
 
-| Attribute     | Description   |
-| ------------- |:-------------:|
-| Azimuth       | Azumuth in decimal degrees (this attribute is observed, widget will be updated when this attribute is changed) |
-| Radius        | Radius of widget in pixels      |
+####Azimuth
+| Attribute       | Description   |
+| ----------------|:-------------:|
+| Azimuth         | Azumuth in decimal degrees (*)      |
+| Radius          | Radius of widget in pixels          |
+| color-primary   | Primary Color HEX code (optional)   |
+| color-secondary | Secondary Color HEX code (optional) |
 
+####Elevation
+| Attribute       | Description   |
+| ----------------|:-------------:|
+| Elevation       | Elevation angle in decimal degrees (*) |
+| Radius          | Radius of widget in pixels             |
+| color-primary   | Primary Color HEX code (optional)      |
+| color-secondary | Secondary Color HEX code (optional)    |
+
+(*) This attriubtes are observed, widget will be updated accordingly when this attribute is changed.
 
 ###The MIT License (MIT)
 
